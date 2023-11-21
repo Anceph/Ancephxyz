@@ -5,6 +5,8 @@ const cheerio = require('cheerio');
 const app = express();
 const port = 3000;
 
+const prices = require('./prices_v6.json');
+
 app.get('/api/doviz/usd', async (req, res) => {
     const url = 'https://kur.doviz.com/serbest-piyasa/amerikan-dolari';
 
@@ -26,6 +28,14 @@ app.get('/api/doviz/usd', async (req, res) => {
         res.json({ error: error.message });
     }
 });
+
+app.get('api/prices', async (req, res) => {
+    try {
+        res.json(prices)
+    } catch (err) {
+        res.json({ error: error.message });
+    }
+})
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
