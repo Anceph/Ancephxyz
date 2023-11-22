@@ -29,7 +29,7 @@ app.get('/api/doviz/usd', async (req, res) => {
     }
 });
 
-app.get('api/prices', async (req, res) => {
+app.get('/api/prices', async (req, res) => {
     try {
         res.json(prices)
     } catch (err) {
