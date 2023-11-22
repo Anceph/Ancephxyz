@@ -31,11 +31,11 @@ app.get('/api/doviz/usd', async (req, res) => {
 
 app.get('/api/prices', async (req, res) => {
     try {
-        res.json(prices)
+        res.json(prices);
     } catch (err) {
-        res.json({ error: error.message });
+        res.json({ error: err.message });
     }
-})
+});
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
