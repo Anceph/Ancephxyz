@@ -29,13 +29,27 @@ app.get('/api/doviz/usd', async (req, res) => {
     }
 });
 
+const zlib = require('zlib');
+
+app.get('/api/prices', async (req, res) => {
+    try {
+        const compressedData = zlib.gzipSync(JSON.stringify(prices));
+        res.setHeader('Content-Encoding', 'gzip');
+        res.json(compressedData);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+
+/*
 app.get('/api/prices', async (req, res) => {
     try {
         res.json(prices);
     } catch (err) {
         res.json({ error: err.message });
     }
-});
+});*/
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
